@@ -22,6 +22,8 @@
     </div>
 </template>
 <script>
+import { UsuarioService } from '@/services/UsuarioService';
+const service=new UsuarioService();
 export default {
     name: "RegistroComponent",
     data() {
@@ -36,12 +38,18 @@ export default {
         }
     },
     methods: {
-        registrarUsuario(){
+        registrarUsuario() {
             if (this.passverificar != this.perfil.pass) {
                 alert("La contraseña no es la misma");
                 return;
             }
-            
+            service.insertarPerfil(this.perfil).then(() => {
+                var login = { email: this.perfil.email, password: this.perfil.pass };
+                service.getToken(login).then((res) => {
+                    localStorage.setItem('token', res.data.response);
+                    this.$router.push('/login');
+                });
+            });
         }
     },
 };
