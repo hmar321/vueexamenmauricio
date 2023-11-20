@@ -1,13 +1,19 @@
 <template>
     <div>
-        <h1>Home Component</h1>
+        <div class="d-flex flex-wrap">
+            <CuboComponent :cubo="cubo" />
+        </div>
     </div>
 </template>
 <script>
+import CuboComponent from './Cubo.vue';
 import { CuboService } from '@/services/CuboService';
 const service = new CuboService();
 export default {
     name: "HomeComponent",
+    components: {
+        CuboComponent
+    },
     data() {
         return {
             cubos: [],

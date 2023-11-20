@@ -1,13 +1,17 @@
 <template>
-    <div>
-        <h1>MarcaComponent</h1>
-    </div>
+   <div class="d-flex flex-wrap">
+    <CuboComponent v-for="cubo of cubos" :key="cubo" [cubo]="cubo"/>
+</div>
 </template>
 <script>
+import CuboComponent from './Cubo.vue';
 import { CuboService } from '@/services/CuboService';
 const service = new CuboService();
 export default {
     name: "MarcaComponent",
+    components: {
+        CuboComponent
+    },
     data() {
         return {
             cubos: [],
